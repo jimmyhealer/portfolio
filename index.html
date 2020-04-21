@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+  <title>Jimmy's</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+  </link>
+  <!-- <link rel="stylesheet" href="assets/css/main.min.css" /> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.9/angular.min.js"></script>
+</head>
+
+<body>
+  <!-- preloader -->
+  <div id="preloader">
+    <div class="lds-ripple">
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <!-- Header -->
+  <header id="header" class="index">
+    <div class="inner">
+      <div class="content">
+        <h1>Jimmy</h1>
+        <h2>
+          HI~我是簡蔚驊
+        </h2>
+        <a href="#" class="button big alt"><span>Let's Go</span></a>
+      </div>
+      <a href="#" class="button hidden"><span>Let's Go</span></a>
+    </div>
+  </header>
+  <!-- <div ng-app="myApp" ng-controller="myCtrl">
+      <img ng-src="{{img}}" alt="" srcset="" />
+    </div> -->
+  <!-- Main -->
+  <div id="main" ng-app="myApp" ng-controller="myCtrl">
+    <div class="inner">
+      <div class="columns">
+        <div class="sizer"></div>
+        <div id="img_{{$index +1 }}" class="item image fit" ng-repeat="x in img">
+          <a href="detail.html?img_{{x.no}}" style="text-decoration: none;">
+            <div class="mask">
+              <div class="inner">
+                <h2>{{x.name}}</h2>
+                <h4>#{{x.category}}相關作品</h4>
+              </div>
+            </div>
+            <picture>
+              <!-- <source srcset="{{x.src}}.webp" type="image/webp" /> -->
+              <img ng-src="{{x.src}}.jpg" alt="" />
+            </picture>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer id="footer">
+    <a href="#" class="info fa fa-info-circle"><span>About</span></a>
+    <div class="inner">
+      <div class="content">
+        <h3>一位天馬行空的高中生</h3>
+        <p>
+          我是簡蔚驊，這是我的作品集。<br />
+          我擅長平面設計、圖像編輯、影像編輯、網頁設計及APP設計。<br />
+          《接案內容》<br />
+          LOGO設計 / 海報設計 / 菜單設計 / 名片 / 影像編輯 <br />
+          架設網站 / 資料庫 / 金流網站 / wordpress網頁架設 / APP設計 /
+          Unity遊戲設計
+          <br />
+        </p>
+      </div>
+      <div class="copyright">
+        <h3>Follow me</h3>
+        <ul class="icons">
+          <li>
+            <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=yahing6066@gmail.com"
+              class="icon fa fas fa-envelope" target="_blank"><span class="label">Gmail</span></a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100000445073213" class="icon fa fa-facebook"
+              target="_blank"><span class="label">Facebook</span></a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/dfic_huahuajian/?hl=zh-tw" class="icon fa fa-instagram"
+              target="_blank"><span class="label">Instagram</span></a>
+          </li>
+        </ul>
+        &copy; programing 普羅首席工程師 : Jimmy 簡蔚驊
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <!-- <script src="assets/js/jquery.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script> -->
+  <script src="assets/js/main.js"></script>
+  <!-- <script src="assets/js/main.min.js"></script> -->
+  <script>
+    $(function () {
+      $("img").lazyload({
+        effect: "fadeIn",
+        load: WaterFall,
+      });
+      //紀錄滾輪位置
+      $(window).scroll(function () {
+        $("#header").addClass("preview");
+        var intY = $(this).scrollTop();
+        $.cookie("intY", intY);
+      });
+    });
+    var cate = location.search.split("?")[1];
+    var app = angular.module("myApp", []);
+    app.controller("myCtrl", function ($scope, $http) {
+      $http
+        .get(
+          "https://spreadsheets.google.com/feeds/list/1f0FacExZeFBxy0H6UHG3hd5LIjUPnOEZKZeiA_qWbpc/1/public/values?alt=json"
+        )
+        .then(function (response) {
+          var d = response.data.feed.entry, dd = 0;
+          var items = [];
+          for (var i in d) {
+            var item = {};
+            item.no = d[i].gsx$no.$t;
+            item.name = d[i].gsx$name.$t;
+            item.src = d[i].gsx$src.$t;
+            item.category = d[i].gsx$category.$t;
+            item.link = d[i].gsx$link.$t;
+            item.introduction = d[i].gsx$introduction.$t;
+            item.hide = d[i].gsx$hide.$t;
+            if (item.src != "" && item.hide == "1" && (item.category == cate || !cate)) dd = 1, items.push(item);
+          }
+          console.log(items == []);
+          if (!dd) location.href = 'index.html';
+          else $.cookie("intY", 0);
+          console.log(location.search);
+          $scope.img = items;
+          window.setTimeout("WaterFall()", 0);
+        });
+    });
+
+    function WaterFall() {
+      $(".columns").imagesLoaded(function () {
+        $(".columns").masonry({
+          itemSelector: ".item",
+          columnWidth: ".sizer",
+          percentPosition: true,
+          gutter: 12,
+        });
+        $(window).scrollTop($.cookie("intY"));
+        $("#preloader").fadeOut("fast", function () {
+          $(this).remove();
+        });
+      });
+    }
+  </script>
+</body>
+
+</html>
