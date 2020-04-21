@@ -1,5 +1,5 @@
 # portfolio
-## this is a portfolio.
+## This is a portfolio.
 
 # 我是簡蔚驊
 這是我的作品集。
