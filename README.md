@@ -11,4 +11,4 @@ LOGO設計 / 海報設計 / 菜單設計 / 名片 / 影像編輯
 
 # 如何聯絡我
 FB: https://www.facebook.com/profile.php?id=100000445073213  
-Email: yahing6066@gmail.com (https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=yahing6066@gmail.com)
+Email: yahing6066@gmail.com [聯絡我](https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=yahing6066@gmail.com)
