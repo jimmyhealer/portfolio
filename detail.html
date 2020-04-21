@@ -41,12 +41,15 @@
   <div id="preview" ng-app="myApp" ng-controller="myCtrl">
     <div class="inner">
       <div class="image fit" ng-repeat="y in imgs">
-        <img ng-src="{{y.src}}.jpg" style="
+        <picture>
+          <source srcset="{{x.src}}.webp" type="image/webp" />
+          <img ng-src="{{y.src}}.jpg" style="
               margin: 25px auto 0px;
               width: auto;
               max-height: 720px;
               max-width: 100%;
             " alt="" />
+        </picture>
       </div>
       <div class="content">
         <header>
