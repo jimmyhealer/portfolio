@@ -841,17 +841,19 @@ ul.alt li {
 	transform: scale(1.1);
 }
 
-/* @media screen and (max-width: 736px) {
-	.columns .item {
-		width: 48%;
+@media screen and (max-width: 1383px) {
+	.columns .sizer, .columns .item {
+		width: 32%;
 	}
 }
 
-@media screen and (max-width: 480px) {
-	.columns .item {
+@media screen and (max-width: 937px) {
+	.columns .sizer, .columns .item {
 		width: 96%;
 	}
-} */
+}
+
+
 
 .columns:after {
 	content: '';
