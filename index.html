@@ -143,7 +143,7 @@
           }
           console.log(items == []);
           if (!dd) location.href = 'index.html';
-          else $.cookie("intY", 0);
+          else if (cate) $.cookie("intY", 0);
           console.log(location.search);
           $scope.img = items;
           window.setTimeout("WaterFall()", 0);

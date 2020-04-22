@@ -136,6 +136,7 @@
             item.category = d[i].gsx$category.$t;
             item.link = d[i].gsx$link.$t;
             item.introduction = d[i].gsx$introduction.$t;
+            item.hide = d[i].gsx$hide.$t;
             items.push(item);
           }
           // console.table(items);
@@ -143,7 +144,9 @@
           $scope.x = items.filter(function (item, index, array) {
             return item.no == location.search.split("?")[1].split("img_")[1];
           });
+          console.log($scope.x[0].hide);
           if ($scope.x == "") location.href = "index.html";
+          else if ($scope.x[0].hide == '0' || $scope.x[0].hide == '') location.href = 'index.html';
           $scope.img = $scope.x[0];
           $scope.imgs = [$scope.img];
           while ($scope.x[0].link != "none") {
