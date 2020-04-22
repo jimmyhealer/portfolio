@@ -7,7 +7,7 @@
 <html>
 
 <head>
-  <title>Detail 1 - Radius by TEMPLATED</title>
+  <title>Jimmy's</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="assets/css/main.css" />
@@ -42,7 +42,7 @@
     <div class="inner">
       <div class="image fit" ng-repeat="y in imgs">
         <picture>
-          <source srcset="{{y.src}}.webp" type="image/webp" />
+          <source ng-srcset="{{y.src}}.webp" type="image/webp" />
           <img ng-src="images/bad.jpg" style="
               margin: 25px auto 0px;
               width: auto;
@@ -113,13 +113,11 @@
   <script src="assets/js/util.js"></script>
   <script src="assets/js/main.js"></script>
   <script>
-    $("img").imagesLoaded(function () {
-      var ssrc = location.search.split("?")[1].split("img_")[1];
-      console.log(!$.isNumeric(ssrc));
-      if (!$.isNumeric(ssrc)) location.href = "index.html";
-      $("#preloader").fadeOut("fast", function () {
-        $(this).remove();
-      });
+    $(function () {
+      var ssrc = location.search.split("?")[1];
+      console.log(ssrc);
+      if (!ssrc) location.href = "index.html";
+      if (!$.isNumeric(ssrc.split("img_")[1])) location.href = "index.html";
     });
     var app = angular.module("myApp", []);
     app.controller("myCtrl", function ($scope, $http) {
@@ -156,6 +154,9 @@
             $scope.x = ssrc;
           }
           console.log($scope.imgs);
+          $("#preloader").fadeOut("fast", function () {
+            $(this).remove();
+          });
         });
     });
   </script>
