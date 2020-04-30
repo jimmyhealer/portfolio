@@ -115,10 +115,9 @@
   <script src="assets/js/main.js"></script>
   <script>
     $(function () {
-      var ssrc = location.search.split("?")[1];
-      console.log(ssrc);
+      var ssrc = /^img_[0-9]{1,}?$/.test(location.search.split("?")[1])
+      console.log('o');
       if (!ssrc) location.href = "index.html";
-      if (!$.isNumeric(ssrc.split("img_")[1])) location.href = "index.html";
     });
     var app = angular.module("myApp", []);
     app.controller("myCtrl", function ($scope, $http) {
@@ -145,7 +144,7 @@
           $scope.x = items.filter(function (item, index, array) {
             return item.no == location.search.split("?")[1].split("img_")[1];
           });
-          console.log($scope.x[0].hide);
+          // console.log($scope.x[0].hide);
           if ($scope.x == "") location.href = "index.html";
           else if ($scope.x[0].hide == '0' || $scope.x[0].hide == '') location.href = 'index.html';
           $scope.img = $scope.x[0];
